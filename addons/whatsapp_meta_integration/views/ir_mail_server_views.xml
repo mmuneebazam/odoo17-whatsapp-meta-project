@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="ir_mail_server_view_form_inherit_whatsapp" model="ir.ui.view">
+        <field name="name">ir.mail.server.form.inherit.whatsapp</field>
+        <field name="model">ir.mail_server</field>
+        <field name="inherit_id" ref="base.ir_mail_server_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//sheet" position="inside">
+                <group string="Deliverability Checks (Phase 6)" col="2">
+                    <field name="spf_verified"/>
+                    <field name="dkim_verified"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>

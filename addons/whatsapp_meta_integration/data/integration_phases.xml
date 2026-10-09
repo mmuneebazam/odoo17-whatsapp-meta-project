@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <record id="phase_0" model="integration.phase">
+        <field name="sequence">0</field>
+        <field name="code">0</field>
+        <field name="name">Audit &amp; Current-State Discovery</field>
+        <field name="description">Review the Meta Business Manager, WhatsApp Business Account, Facebook Page, Instagram account, Odoo 19 WhatsApp app configuration, Odoo email configuration, and every permission granted to the Meta app/System User. Produce a findings note before changing anything.</field>
+        <field name="expected_output">A clear picture of exactly what is connected, what is broken, and why, before anything is changed.</field>
+        <field name="hours_planned_min">4</field>
+        <field name="hours_planned_max">8</field>
+    </record>
+    <record id="phase_1" model="integration.phase">
+        <field name="sequence">10</field>
+        <field name="code">1</field>
+        <field name="name">Meta Business Manager Verification &amp; Ownership Cleanup</field>
+        <field name="description">Resolve any pending or failed Meta Business verification; confirm the client holds primary admin ownership of the Business Portfolio, Page, Instagram account and WABA; clean up asset assignment so all assets sit in the one correct Business Portfolio.</field>
+        <field name="expected_output">A Business Portfolio that is verified, correctly owned, and holding the right assets.</field>
+        <field name="hours_planned_min">3</field>
+        <field name="hours_planned_max">6</field>
+    </record>
+    <record id="phase_2" model="integration.phase">
+        <field name="sequence">20</field>
+        <field name="code">2</field>
+        <field name="name">WhatsApp Business Platform Setup with Mobile-App Coexistence</field>
+        <field name="description">Confirm the client's WABA and phone number are eligible for coexistence between the mobile app and the Cloud API under Meta's current rules; register the number for Cloud API access following the coexistence-specific flow; verify the mobile WhatsApp Business app still works on the same number.</field>
+        <field name="expected_output">WhatsApp connected to Odoo via the Cloud API, with the existing mobile app still usable on the same number.</field>
+        <field name="hours_planned_min">6</field>
+        <field name="hours_planned_max">12</field>
+    </record>
+    <record id="phase_3" model="integration.phase">
+        <field name="sequence">30</field>
+        <field name="code">3</field>
+        <field name="name">Odoo WhatsApp App Configuration</field>
+        <field name="description">Configure the WhatsApp integration with the WABA ID, phone number ID and System User token; configure and verify the webhook (URL reachable from Meta, verify token matching, subscription fields); send and receive real test messages; confirm status updates flow back; confirm at least one approved template sends end to end.</field>
+        <field name="expected_output">Odoo correctly authenticated against the WhatsApp Business Platform, sending and receiving reliably.</field>
+        <field name="hours_planned_min">4</field>
+        <field name="hours_planned_max">8</field>
+    </record>
+    <record id="phase_4" model="integration.phase">
+        <field name="sequence">40</field>
+        <field name="code">4</field>
+        <field name="name">Facebook Page &amp; Instagram Business Connection</field>
+        <field name="description">Confirm the Instagram account is a genuine Business/Professional account; link it to the correct Facebook Page; confirm the Page is assigned to the cleaned-up Business Portfolio with the right admin roles; confirm Page/Instagram messaging permissions and test real inbound messages.</field>
+        <field name="expected_output">The Page and Instagram account correctly linked to each other and to the right Business Portfolio.</field>
+        <field name="hours_planned_min">3</field>
+        <field name="hours_planned_max">6</field>
+    </record>
+    <record id="phase_5" model="integration.phase">
+        <field name="sequence">50</field>
+        <field name="code">5</field>
+        <field name="name">Permissions, Tokens &amp; App Review</field>
+        <field name="description">Inventory every permission granted to the Meta app/System User and remove anything broader than needed; use a long-lived System User token; if App Review is required, submit only the genuinely required permissions; document token ownership and renewal responsibility.</field>
+        <field name="expected_output">Exactly the access needed, correctly scoped, documented and renewable without guesswork.</field>
+        <field name="hours_planned_min">3</field>
+        <field name="hours_planned_max">6</field>
+    </record>
+    <record id="phase_6" model="integration.phase">
+        <field name="sequence">60</field>
+        <field name="code">6</field>
+        <field name="name">Email Integration Configuration</field>
+        <field name="description">Configure the outgoing mail server for the business domain and test sending from a real record; configure incoming mail handling (catch-all/alias routing); check SPF/DKIM deliverability fundamentals; confirm WhatsApp and email channels are clearly identifiable on the customer timeline.</field>
+        <field name="expected_output">Odoo sending and receiving business email reliably, alongside the WhatsApp/Meta work.</field>
+        <field name="hours_planned_min">2</field>
+        <field name="hours_planned_max">5</field>
+    </record>
+    <record id="phase_7" model="integration.phase">
+        <field name="sequence">70</field>
+        <field name="code">7</field>
+        <field name="name">End-to-End Testing &amp; Validation</field>
+        <field name="description">Run a full real-world test across WhatsApp (API and mobile app), email, Page and Instagram; deliberately test a failure path (invalid/expired token); have the client send real test messages from their own phone and from Odoo; re-confirm the mobile app constraint held throughout.</field>
+        <field name="expected_output">Every connection proven working together, not just individually.</field>
+        <field name="hours_planned_min">2</field>
+        <field name="hours_planned_max">4</field>
+    </record>
+    <record id="phase_8" model="integration.phase">
+        <field name="sequence">80</field>
+        <field name="code">8</field>
+        <field name="name">Documentation, Handover &amp; Ongoing Maintenance</field>
+        <field name="description">Write a plain-language summary of the final Meta/Odoo structure; document what needs periodic attention and how often; hand over admin ownership of every Meta asset and Odoo credential to the client; provide a troubleshooting quick-reference.</field>
+        <field name="expected_output">The client can maintain this setup, or brief a future developer, without re-discovering everything from scratch.</field>
+        <field name="hours_planned_min">2</field>
+        <field name="hours_planned_max">4</field>
+    </record>
+</odoo>

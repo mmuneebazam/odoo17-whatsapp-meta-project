@@ -1,0 +1,39 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pyc
+.venv/
+venv/
+.env
+.env.*
+
+# Odoo
+odoo.conf
+*.sass-cache
+*.log
+*.pid
+server.pid
+
+# Build artifacts
+build/
+dist/
+.eggs/
+*.egg-info/
+*.egg
+
+# IDE/editor
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# OS
+*.swp
+*.swo
+
+# Local database / backups
+*.dump
+*.sql
+postgres_data/

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <record id="dod_1" model="integration.dod">
+        <field name="name">The audit was completed and reviewed with the client before any Meta-side or Odoo-side change was made.</field>
+    </record>
+    <record id="dod_2" model="integration.dod">
+        <field name="name">WhatsApp messages can be sent and received through Odoo, and the client's mobile WhatsApp Business app still works normally on the same number.</field>
+    </record>
+    <record id="dod_3" model="integration.dod">
+        <field name="name">The Facebook Page and Instagram Business account are correctly linked to each other and to the Business Portfolio, with no permission or verification errors outstanding.</field>
+    </record>
+    <record id="dod_4" model="integration.dod">
+        <field name="name">Odoo's email integration sends and receives correctly for the client's domain.</field>
+    </record>
+    <record id="dod_5" model="integration.dod">
+        <field name="name">Every permission in use is scoped to what the integration actually needs, using a long-lived, documented token.</field>
+    </record>
+    <record id="dod_6" model="integration.dod">
+        <field name="name">The client holds admin ownership of every Meta asset and Odoo credential involved, and has a written reference for ongoing maintenance.</field>
+    </record>
+    <record id="dod_7" model="integration.dod">
+        <field name="name">Every claim in the plan about coexistence, permissions, or verification was checked against Meta's and Odoo's current documentation for this specific account, not assumed from general knowledge.</field>
+    </record>
+</odoo>

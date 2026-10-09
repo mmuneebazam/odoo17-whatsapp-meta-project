@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="integration_test_view_tree" model="ir.ui.view">
+        <field name="name">integration.test.tree</field>
+        <field name="model">integration.test</field>
+        <field name="arch" type="xml">
+            <tree editable="bottom">
+                <field name="name"/>
+                <field name="test_type"/>
+                <field name="result" widget="badge"
+                       decoration-success="result == 'passed'"
+                       decoration-danger="result == 'failed'"
+                       decoration-muted="result == 'not_run'"/>
+                <field name="executed_by"/>
+                <field name="executed_date"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="integration_test_view_form" model="ir.ui.view">
+        <field name="name">integration.test.form</field>
+        <field name="model">integration.test</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="test_type"/>
+                        </group>
+                        <group>
+                            <field name="result" widget="statusbar"
+                                   options="{'clickable': '1'}"/>
+                            <field name="executed_by"/>
+                            <field name="executed_date"/>
+                        </group>
+                    </group>
+                    <group string="Notes">
+                        <field name="notes" nolabel="1" colspan="2"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="integration_test_action" model="ir.actions.act_window">
+        <field name="name">End-to-End Tests</field>
+        <field name="res_model">integration.test</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">No end-to-end tests logged yet</p>
+            <p>Phase 7: prove every connection works together - WhatsApp send/receive, the
+            mobile app on the same number, email send/receive, Page and Instagram messages,
+            and a deliberate failure path.</p>
+        </field>
+    </record>
+</odoo>

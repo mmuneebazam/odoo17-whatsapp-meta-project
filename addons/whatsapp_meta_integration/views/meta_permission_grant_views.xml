@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="meta_permission_grant_view_tree" model="ir.ui.view">
+        <field name="name">meta.permission.grant.tree</field>
+        <field name="model">meta.permission.grant</field>
+        <field name="arch" type="xml">
+            <tree editable="bottom">
+                <field name="name"/>
+                <field name="app_name"/>
+                <field name="scope" widget="badge"/>
+                <field name="status" widget="badge"
+                       decoration-success="status == 'granted'"
+                       decoration-warning="status == 'requested'"
+                       decoration-danger="status in ('missing', 'revoked')"/>
+                <field name="notes"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="meta_permission_grant_view_form" model="ir.ui.view">
+        <field name="name">meta.permission.grant.form</field>
+        <field name="model">meta.permission.grant</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="app_name"/>
+                        </group>
+                        <group>
+                            <field name="scope"/>
+                            <field name="status" widget="statusbar"
+                                   options="{'clickable': '1'}"/>
+                        </group>
+                    </group>
+                    <group string="Notes">
+                        <field name="notes" nolabel="1" colspan="2"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="meta_permission_grant_action" model="ir.actions.act_window">
+        <field name="name">Permissions Inventory</field>
+        <field name="res_model">meta.permission.grant</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Inventory the Meta app / System User permissions</p>
+            <p>Phase 5: list every permission, mark what is required, and remove anything
+            broader than what the Odoo integration actually uses.</p>
+        </field>
+    </record>
+</odoo>

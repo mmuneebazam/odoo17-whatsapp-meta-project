@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Phase 5: permissions inventory -->
+    <record id="demo_permission_1" model="meta.permission.grant">
+        <field name="name">whatsapp_business_messaging</field>
+        <field name="app_name">Demo Meta App / System User</field>
+        <field name="scope">required</field>
+        <field name="status">granted</field>
+    </record>
+    <record id="demo_permission_2" model="meta.permission.grant">
+        <field name="name">whatsapp_business_management</field>
+        <field name="app_name">Demo Meta App / System User</field>
+        <field name="scope">required</field>
+        <field name="status">granted</field>
+    </record>
+    <record id="demo_permission_3" model="meta.permission.grant">
+        <field name="name">pages_messaging</field>
+        <field name="app_name">Demo Meta App / System User</field>
+        <field name="scope">required</field>
+        <field name="status">granted</field>
+    </record>
+    <record id="demo_permission_4" model="meta.permission.grant">
+        <field name="name">instagram_manage_messages</field>
+        <field name="app_name">Demo Meta App / System User</field>
+        <field name="scope">required</field>
+        <field name="status">requested</field>
+        <field name="notes">Requested during Phase 5; awaiting grant in Meta Business Manager.</field>
+    </record>
+
+    <!-- Phase 1: business portfolio -->
+    <record id="demo_partner_owner" model="res.partner">
+        <field name="name">Demo Business Owner</field>
+        <field name="email">owner@example.com</field>
+    </record>
+    <record id="demo_portfolio" model="meta.business.portfolio">
+        <field name="name">Demo Business Portfolio</field>
+        <field name="business_id">1234567890</field>
+        <field name="verification_status">verified</field>
+        <field name="verification_date">2026-01-15</field>
+        <field name="owner_id" ref="demo_partner_owner"/>
+        <field name="notes">Demo data - replace with the client's real Business Portfolio details.</field>
+    </record>
+
+    <!-- Phase 4: page + instagram -->
+    <record id="demo_instagram" model="meta.instagram.account">
+        <field name="name">Demo Instagram Business</field>
+        <field name="instagram_id">17841400000000000</field>
+        <field name="account_type">business</field>
+        <field name="portfolio_id" ref="demo_portfolio"/>
+        <field name="linked_ok" eval="True"/>
+        <field name="messaging_permission">granted</field>
+    </record>
+    <record id="demo_page" model="meta.page">
+        <field name="name">Demo Facebook Page</field>
+        <field name="page_id">555000111</field>
+        <field name="portfolio_id" ref="demo_portfolio"/>
+        <field name="instagram_id" ref="demo_instagram"/>
+        <field name="linked_ok" eval="True"/>
+        <field name="messaging_permission">granted</field>
+    </record>
+    <record id="demo_instagram" model="meta.instagram.account">
+        <field name="page_id" ref="demo_page"/>
+    </record>
+
+    <!-- Phase 2: WABA + phone number with coexistence confirmed -->
+    <record id="demo_waba" model="whatsapp.business.account">
+        <field name="name">Demo WhatsApp Business Account</field>
+        <field name="waba_id">987654321098</field>
+        <field name="portfolio_id" ref="demo_portfolio"/>
+        <field name="company_id" ref="base.main_company"/>
+        <field name="cloud_api_status">registered</field>
+        <field name="quality_status">green</field>
+        <field name="coexistence_eligible" eval="True"/>
+        <field name="coexistence_confirmed" eval="True"/>
+        <field name="coexistence_signoff_date">2026-02-01</field>
+        <field name="coexistence_notes">Demo data: eligibility confirmed against Meta documentation; mobile app remains active on the same number.</field>
+    </record>
+    <record id="demo_phone_number" model="whatsapp.phone.number">
+        <field name="name">Demo Support Line</field>
+        <field name="phone_number">+15551234567</field>
+        <field name="phone_number_id">123456789012345</field>
+        <field name="waba_id" ref="demo_waba"/>
+        <field name="verified" eval="True"/>
+        <field name="quality_rating">green</field>
+        <field name="connection_status">connected</field>
+    </record>
+
+    <!-- Phase 3: approved template -->
+    <record id="demo_template" model="whatsapp.template">
+        <field name="name">Order Confirmation</field>
+        <field name="template_name">order_confirmation</field>
+        <field name="language_code">en_US</field>
+        <field name="category">utility</field>
+        <field name="status">approved</field>
+        <field name="body">Hi {{1}}, your order {{2}} has been confirmed and is being prepared. Thank you for shopping with us!</field>
+    </record>
+
+    <!-- Phase 5: app review record -->
+    <record id="demo_app_review" model="meta.app.review">
+        <field name="name">Meta App Review - WhatsApp + Page/Instagram messaging</field>
+        <field name="status">approved</field>
+        <field name="permissions_requested">whatsapp_business_messaging, whatsapp_business_management, pages_messaging, instagram_manage_messages</field>
+        <field name="use_case_description">Demo data: Odoo sends order notifications and receives customer replies over WhatsApp, Facebook Page and Instagram.</field>
+    </record>
+
+    <!-- Demo conversation with one inbound and one outbound message -->
+    <record id="demo_partner_customer" model="res.partner">
+        <field name="name">Demo Customer</field>
+        <field name="whatsapp_number">+15559876543</field>
+        <field name="phone">+15559876543</field>
+    </record>
+    <record id="demo_conversation" model="whatsapp.conversation">
+        <field name="partner_id" ref="demo_partner_customer"/>
+        <field name="phone_number_id" ref="demo_phone_number"/>
+        <field name="state">open</field>
+    </record>
+    <record id="demo_message_inbound" model="whatsapp.message">
+        <field name="conversation_id" ref="demo_conversation"/>
+        <field name="direction">inbound</field>
+        <field name="msg_type">text</field>
+        <field name="body">Hello, I have a question about my order.</field>
+        <field name="meta_message_id">wamid.DEMOINBOUND0001</field>
+        <field name="status">received</field>
+        <field name="timestamp">2026-10-08 10:30:00</field>
+    </record>
+    <record id="demo_message_outbound" model="whatsapp.message">
+        <field name="conversation_id" ref="demo_conversation"/>
+        <field name="direction">outbound</field>
+        <field name="msg_type">text</field>
+        <field name="body">Hi! Of course - how can we help you today?</field>
+        <field name="meta_message_id">wamid.DEMOOUTBOUND0001</field>
+        <field name="status">read</field>
+        <field name="timestamp">2026-10-08 10:31:00</field>
+    </record>
+
+    <!-- Phase 8: maintenance schedule -->
+    <record id="demo_maintenance_1" model="integration.maintenance">
+        <field name="name">System User access token renewal check</field>
+        <field name="frequency">yearly</field>
+        <field name="next_due">2027-01-01</field>
+        <field name="notes">Regenerate the token in Meta Business Manager if expired; update Settings &gt; WhatsApp / Meta Integration.</field>
+    </record>
+    <record id="demo_maintenance_2" model="integration.maintenance">
+        <field name="name">Meta Business verification renewal check</field>
+        <field name="frequency">yearly</field>
+        <field name="next_due">2027-01-15</field>
+    </record>
+    <record id="demo_maintenance_3" model="integration.maintenance">
+        <field name="name">WhatsApp template re-approval if content changes</field>
+        <field name="frequency">on_change</field>
+        <field name="notes">Any change to template body/language requires re-approval in Meta Business Manager before sending.</field>
+    </record>
+</odoo>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="integration_maintenance_view_tree" model="ir.ui.view">
+        <field name="name">integration.maintenance.tree</field>
+        <field name="model">integration.maintenance</field>
+        <field name="arch" type="xml">
+            <tree editable="bottom" decoration-danger="next_due and next_due &lt; current_date">
+                <field name="name"/>
+                <field name="frequency" widget="badge"/>
+                <field name="next_due"/>
+                <field name="owner_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="integration_maintenance_view_form" model="ir.ui.view">
+        <field name="name">integration.maintenance.form</field>
+        <field name="model">integration.maintenance</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="frequency"/>
+                        </group>
+                        <group>
+                            <field name="next_due"/>
+                            <field name="owner_id"/>
+                        </group>
+                    </group>
+                    <group string="Notes">
+                        <field name="notes" nolabel="1" colspan="2"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="integration_maintenance_action" model="ir.actions.act_window">
+        <field name="name">Maintenance Schedule</field>
+        <field name="res_model">integration.maintenance</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>

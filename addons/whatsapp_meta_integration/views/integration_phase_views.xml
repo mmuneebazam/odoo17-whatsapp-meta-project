@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="integration_phase_view_tree" model="ir.ui.view">
+        <field name="name">integration.phase.tree</field>
+        <field name="model">integration.phase</field>
+        <field name="arch" type="xml">
+            <tree editable="bottom">
+                <field name="sequence" widget="handle"/>
+                <field name="code"/>
+                <field name="name"/>
+                <field name="status" widget="badge"
+                       decoration-success="status == 'done'"
+                       decoration-info="status == 'in_progress'"
+                       decoration-danger="status == 'blocked'"
+                       decoration-muted="status == 'not_started'"/>
+                <field name="hours_planned_min"/>
+                <field name="hours_planned_max"/>
+                <field name="hours_spent"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="integration_phase_view_form" model="ir.ui.view">
+        <field name="name">integration.phase.form</field>
+        <field name="model">integration.phase</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class="oe_title">
+                        <h1><field name="code"/> - <field name="name" class="oe_inline"/></h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="status" widget="statusbar"
+                                   options="{'clickable': '1'}"/>
+                            <field name="sequence"/>
+                        </group>
+                        <group>
+                            <field name="hours_planned_min"/>
+                            <field name="hours_planned_max"/>
+                            <field name="hours_spent"/>
+                        </group>
+                    </group>
+                    <group string="Scope">
+                        <field name="description" nolabel="1" colspan="2"/>
+                    </group>
+                    <group string="Expected Output">
+                        <field name="expected_output" nolabel="1" colspan="2"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="integration_phase_action" model="ir.actions.act_window">
+        <field name="name">Delivery Plan Phases</field>
+        <field name="res_model">integration.phase</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>

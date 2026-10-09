@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="whatsapp_message_view_tree" model="ir.ui.view">
+        <field name="name">whatsapp.message.tree</field>
+        <field name="model">whatsapp.message</field>
+        <field name="arch" type="xml">
+            <tree decoration-info="direction == 'inbound'"
+                  decoration-danger="status == 'failed'"
+                  decoration-success="status == 'read'"
+                  create="false" delete="false">
+                <field name="timestamp"/>
+                <field name="conversation_id"/>
+                <field name="partner_id"/>
+                <field name="direction" widget="badge"/>
+                <field name="msg_type"/>
+                <field name="body"/>
+                <field name="status" widget="badge"
+                       decoration-muted="status == 'received'"
+                       decoration-info="status in ('pending', 'sent')"
+                       decoration-success="status in ('delivered', 'read')"
+                       decoration-danger="status == 'failed'"/>
+                <field name="meta_message_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="whatsapp_message_view_form" model="ir.ui.view">
+        <field name="name">whatsapp.message.form</field>
+        <field name="model">whatsapp.message</field>
+        <field name="arch" type="xml">
+            <form create="false" delete="false">
+                <header>
+                    <button name="action_send" string="Send via WhatsApp"
+                            type="object" class="btn-primary"
+                            invisible="direction != 'outbound' or status not in ('pending', 'failed')"/>
+                    <field name="status" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="conversation_id"/>
+                            <field name="partner_id"/>
+                            <field name="direction"/>
+                            <field name="msg_type"/>
+                        </group>
+                        <group>
+                            <field name="timestamp"/>
+                            <field name="meta_message_id"/>
+                            <field name="company_id" groups="base.group_multi_company"/>
+                        </group>
+                    </group>
+                    <group string="Content">
+                        <field name="template_id" invisible="msg_type != 'template'"/>
+                        <field name="body" nolabel="1" colspan="2"/>
+                    </group>
+                    <group string="Error" invisible="status != 'failed'">
+                        <field name="status_error" nolabel="1" colspan="2"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="whatsapp_message_action" model="ir.actions.act_window">
+        <field name="name">WhatsApp Messages</field>
+        <field name="res_model">whatsapp.message</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>

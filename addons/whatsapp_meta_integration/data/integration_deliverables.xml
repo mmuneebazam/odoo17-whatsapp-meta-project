@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <record id="deliverable_1" model="integration.deliverable">
+        <field name="name">Audit findings note covering Meta Business Manager, WABA, Page, Instagram and Odoo/email current state.</field>
+        <field name="phase_id" ref="phase_0"/>
+    </record>
+    <record id="deliverable_2" model="integration.deliverable">
+        <field name="name">A verified, correctly owned Meta Business Portfolio with all relevant assets assigned to it.</field>
+        <field name="phase_id" ref="phase_1"/>
+    </record>
+    <record id="deliverable_3" model="integration.deliverable">
+        <field name="name">WhatsApp connected to Odoo via the Cloud API, with the existing mobile WhatsApp Business app confirmed still active on the same number.</field>
+        <field name="phase_id" ref="phase_2"/>
+    </record>
+    <record id="deliverable_4" model="integration.deliverable">
+        <field name="name">A working, tested send/receive flow between Odoo and WhatsApp, including message status updates.</field>
+        <field name="phase_id" ref="phase_3"/>
+    </record>
+    <record id="deliverable_5" model="integration.deliverable">
+        <field name="name">Facebook Page and Instagram Business account correctly linked to each other and to the Business Portfolio.</field>
+        <field name="phase_id" ref="phase_4"/>
+    </record>
+    <record id="deliverable_6" model="integration.deliverable">
+        <field name="name">A reviewed, minimally-scoped permission set with a long-lived token strategy, documented.</field>
+        <field name="phase_id" ref="phase_5"/>
+    </record>
+    <record id="deliverable_7" model="integration.deliverable">
+        <field name="name">Working Odoo email sending/receiving configuration.</field>
+        <field name="phase_id" ref="phase_6"/>
+    </record>
+    <record id="deliverable_8" model="integration.deliverable">
+        <field name="name">Evidence of end-to-end testing across WhatsApp (API and mobile app), email, Page and Instagram.</field>
+        <field name="phase_id" ref="phase_7"/>
+    </record>
+    <record id="deliverable_9" model="integration.deliverable">
+        <field name="name">A handover document: ownership summary, credential locations, maintenance schedule, and a troubleshooting quick-reference.</field>
+        <field name="phase_id" ref="phase_8"/>
+    </record>
+</odoo>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="integration_deliverable_view_tree" model="ir.ui.view">
+        <field name="name">integration.deliverable.tree</field>
+        <field name="model">integration.deliverable</field>
+        <field name="arch" type="xml">
+            <tree editable="bottom" decoration-success="done">
+                <field name="done" widget="boolean_toggle"/>
+                <field name="name"/>
+                <field name="phase_id"/>
+                <field name="notes"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="integration_deliverable_view_form" model="ir.ui.view">
+        <field name="name">integration.deliverable.form</field>
+        <field name="model">integration.deliverable</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="phase_id"/>
+                        </group>
+                        <group>
+                            <field name="done"/>
+                        </group>
+                    </group>
+                    <group string="Notes">
+                        <field name="notes" nolabel="1" colspan="2"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="integration_deliverable_action" model="ir.actions.act_window">
+        <field name="name">Deliverables Checklist</field>
+        <field name="res_model">integration.deliverable</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>

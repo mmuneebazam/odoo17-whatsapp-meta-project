@@ -1,0 +1,28 @@
+[options]
+; Master password for the database manager (http://localhost:8069/web/database/manager)
+admin_passwd = admin
+
+; PostgreSQL connection (adjust to your setup)
+db_host = localhost
+db_port = 5432
+db_user = odoo
+db_password = odoo
+
+; Comma-separated addons paths (NO spaces after commas):
+;   1) Odoo's built-in addons   2) Odoo's community addons   3) THIS project's addons
+; Example (Linux):
+; addons_path = /home/YOU/odoo17/odoo/addons,/home/YOU/odoo17/addons,/home/YOU/odoo17_whatsapp_meta_project/addons
+; Example (macOS):
+; addons_path = /Users/YOU/odoo17/odoo/addons,/Users/YOU/odoo17/addons,/Users/YOU/odoo17_whatsapp_meta_project/addons
+; Example (Windows):
+; addons_path = C:\Users\YOU\odoo17\odoo\addons,C:\Users\YOU\odoo17\addons,C:\Users\YOU\odoo17_whatsapp_meta_project\addons
+addons_path = /path/to/odoo17/odoo/addons,/path/to/odoo17/addons,/path/to/odoo17_whatsapp_meta_project/addons
+
+; Show the database manager / list databases
+list_db = True
+
+log_level = info
+http_port = 8069
+
+; Uncomment to restrict which databases are listed in the web UI:
+; dbfilter = ^whatsapp_odoo17$

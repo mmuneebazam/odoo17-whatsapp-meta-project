@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="integration_risk_view_tree" model="ir.ui.view">
+        <field name="name">integration.risk.tree</field>
+        <field name="model">integration.risk</field>
+        <field name="arch" type="xml">
+            <tree decoration-danger="impact == 'critical' or (impact == 'high' and likelihood == 'high')"
+                  decoration-warning="impact == 'high' or likelihood == 'high'">
+                <field name="name"/>
+                <field name="likelihood" widget="badge"/>
+                <field name="impact" widget="badge"
+                       decoration-danger="impact in ('high', 'critical')"
+                       decoration-warning="impact == 'medium'"/>
+                <field name="status" widget="badge"
+                       decoration-success="status == 'closed'"
+                       decoration-info="status == 'mitigated'"
+                       decoration-danger="status == 'open'"/>
+                <field name="owner_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="integration_risk_view_form" model="ir.ui.view">
+        <field name="name">integration.risk.form</field>
+        <field name="model">integration.risk</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class="oe_title">
+                        <h1><field name="name"/></h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="likelihood"/>
+                            <field name="impact"/>
+                        </group>
+                        <group>
+                            <field name="status" widget="statusbar"
+                                   options="{'clickable': '1'}"/>
+                            <field name="owner_id"/>
+                        </group>
+                    </group>
+                    <group string="Why It Matters">
+                        <field name="description" nolabel="1" colspan="2"/>
+                    </group>
+                    <group string="Mitigation">
+                        <field name="mitigation" nolabel="1" colspan="2"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="integration_risk_action" model="ir.actions.act_window">
+        <field name="name">Risk Register</field>
+        <field name="res_model">integration.risk</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="res_config_settings_view_form_inherit_whatsapp" model="ir.ui.view">
+        <field name="name">res.config.settings.form.inherit.whatsapp</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="base_setup.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="inside">
+                <group string="WhatsApp / Meta Integration" name="whatsapp_meta_settings">
+                    <group name="whatsapp_meta_settings_left">
+                        <field name="whatsapp_waba_id" options="{'no_create': True, 'no_open': True}"/>
+                        <field name="whatsapp_phone_number_id" options="{'no_create': True, 'no_open': True}"/>
+                        <field name="whatsapp_api_version"/>
+                        <field name="whatsapp_verify_token"/>
+                        <field name="whatsapp_webhook_url" widget="url"/>
+                    </group>
+                    <group name="whatsapp_meta_settings_right">
+                        <field name="whatsapp_access_token" password="1"/>
+                        <field name="whatsapp_app_secret" password="1"/>
+                        <field name="whatsapp_token_expiry_date"/>
+                    </group>
+                </group>
+                <div class="alert alert-info" role="alert">
+                    <strong>Phase 3 setup:</strong> in the Meta App webhook configuration, set the
+                    Callback URL to the Webhook URL above and the Verify Token to the Webhook
+                    Verify Token above. Subscribe to the <em>messages</em> and
+                    <em>message_status</em> (message_sent, message_delivered, message_read) fields.
+                    Use a long-lived System User token (Phase 5), and make the webhook URL
+                    publicly reachable (e.g. via a tunnel such as ngrok during local development).
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>

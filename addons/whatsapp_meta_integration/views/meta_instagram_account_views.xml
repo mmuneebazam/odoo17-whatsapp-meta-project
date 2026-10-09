@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="meta_instagram_account_view_tree" model="ir.ui.view">
+        <field name="name">meta.instagram.account.tree</field>
+        <field name="model">meta.instagram.account</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="instagram_id"/>
+                <field name="account_type" widget="badge"/>
+                <field name="portfolio_id"/>
+                <field name="page_id"/>
+                <field name="linked_ok" widget="boolean_toggle"/>
+                <field name="messaging_permission" widget="badge"
+                       decoration-success="messaging_permission == 'granted'"
+                       decoration-warning="messaging_permission == 'requested'"
+                       decoration-danger="messaging_permission == 'missing'"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="meta_instagram_account_view_form" model="ir.ui.view">
+        <field name="name">meta.instagram.account.form</field>
+        <field name="model">meta.instagram.account</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class="oe_title">
+                        <h1><field name="name"/></h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="instagram_id"/>
+                            <field name="account_type" widget="statusbar"
+                                   options="{'clickable': '1'}"/>
+                            <field name="portfolio_id"/>
+                        </group>
+                        <group>
+                            <field name="page_id"/>
+                            <field name="linked_ok"/>
+                            <field name="messaging_permission" widget="statusbar"
+                                   options="{'clickable': '1'}"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="meta_instagram_account_action" model="ir.actions.act_window">
+        <field name="name">Instagram Accounts</field>
+        <field name="res_model">meta.instagram.account</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="whatsapp_conversation_view_tree" model="ir.ui.view">
+        <field name="name">whatsapp.conversation.tree</field>
+        <field name="model">whatsapp.conversation</field>
+        <field name="arch" type="xml">
+            <tree decoration-muted="state == 'archived'">
+                <field name="name"/>
+                <field name="partner_id"/>
+                <field name="phone_number_id"/>
+                <field name="message_count"/>
+                <field name="last_message_date"/>
+                <field name="state" widget="badge"
+                       decoration-success="state == 'open'"
+                       decoration-muted="state == 'archived'"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="whatsapp_conversation_view_form" model="ir.ui.view">
+        <field name="name">whatsapp.conversation.form</field>
+        <field name="model">whatsapp.conversation</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <field name="state" widget="statusbar" options="{'clickable': '1'}"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1><field name="name"/></h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="partner_id"/>
+                            <field name="phone_number_id"/>
+                            <field name="company_id" groups="base.group_multi_company"/>
+                        </group>
+                        <group>
+                            <field name="message_count"/>
+                            <field name="last_message_date"/>
+                        </group>
+                    </group>
+                    <group string="Send a WhatsApp Message">
+                        <field name="draft_message" nolabel="1" colspan="2"
+                               placeholder="Type your message here..."/>
+                        <button name="action_send_message" string="Send"
+                                type="object" class="btn-primary" icon="fa-whatsapp"
+                                invisible="state == 'archived'"/>
+                    </group>
+                    <notebook>
+                        <page string="Messages" name="messages">
+                            <field name="whatsapp_message_ids">
+                                <tree decoration-info="direction == 'inbound'"
+                                      decoration-danger="status == 'failed'"
+                                      decoration-success="status == 'read'">
+                                    <field name="timestamp"/>
+                                    <field name="direction" widget="badge"/>
+                                    <field name="msg_type"/>
+                                    <field name="body"/>
+                                    <field name="status" widget="badge"
+                                           decoration-muted="status == 'received'"
+                                           decoration-info="status in ('pending', 'sent')"
+                                           decoration-success="status in ('delivered', 'read')"
+                                           decoration-danger="status == 'failed'"/>
+                                    <field name="meta_message_id"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="whatsapp_conversation_action" model="ir.actions.act_window">
+        <field name="name">WhatsApp Conversations</field>
+        <field name="res_model">whatsapp.conversation</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">No WhatsApp conversations yet</p>
+            <p>Conversations appear here when a message is sent from Odoo or when a customer
+            messages the connected WhatsApp number (via the Meta webhook).</p>
+        </field>
+    </record>
+</odoo>

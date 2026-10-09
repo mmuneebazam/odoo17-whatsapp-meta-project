@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="whatsapp_phone_number_view_tree" model="ir.ui.view">
+        <field name="name">whatsapp.phone.number.tree</field>
+        <field name="model">whatsapp.phone.number</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="phone_number" widget="phone"/>
+                <field name="phone_number_id"/>
+                <field name="waba_id"/>
+                <field name="verified" widget="boolean_toggle"/>
+                <field name="quality_rating" widget="badge"/>
+                <field name="connection_status" widget="badge"
+                       decoration-success="connection_status == 'connected'"
+                       decoration-warning="connection_status == 'pending'"
+                       decoration-danger="connection_status == 'disconnected'"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="whatsapp_phone_number_view_form" model="ir.ui.view">
+        <field name="name">whatsapp.phone.number.form</field>
+        <field name="model">whatsapp.phone.number</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class="oe_title">
+                        <h1><field name="name"/></h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="phone_number" widget="phone"/>
+                            <field name="phone_number_id"/>
+                            <field name="waba_id"/>
+                        </group>
+                        <group>
+                            <field name="verified"/>
+                            <field name="quality_rating" widget="badge"/>
+                            <field name="connection_status" widget="statusbar"
+                                   options="{'clickable': '1'}"/>
+                            <field name="company_id" groups="base.group_multi_company"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="whatsapp_phone_number_action" model="ir.actions.act_window">
+        <field name="name">WhatsApp Phone Numbers</field>
+        <field name="res_model">whatsapp.phone.number</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Add a WhatsApp phone number</p>
+            <p>Phase 2/3: the number must be registered for Cloud API access (with mobile-app
+            coexistence confirmed) and its Meta Phone Number ID is used for all API calls.</p>
+        </field>
+    </record>
+</odoo>

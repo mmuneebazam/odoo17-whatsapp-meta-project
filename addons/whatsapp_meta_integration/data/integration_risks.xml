@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <record id="risk_1" model="integration.risk">
+        <field name="name">Phone number not eligible for app + Cloud API coexistence</field>
+        <field name="description">Could force a choice between keeping the mobile app and connecting Odoo.</field>
+        <field name="mitigation">Confirm eligibility in Phase 2 before any registration change; get client sign-off on the trade-off if ineligible.</field>
+        <field name="likelihood">medium</field>
+        <field name="impact">critical</field>
+    </record>
+    <record id="risk_2" model="integration.risk">
+        <field name="name">Meta Business verification stuck or rejected</field>
+        <field name="description">Blocks reliable permission grants for WhatsApp, Page and Instagram alike.</field>
+        <field name="mitigation">Resolve verification first in Phase 1, since most other issues cascade from it.</field>
+        <field name="likelihood">medium</field>
+        <field name="impact">high</field>
+    </record>
+    <record id="risk_3" model="integration.risk">
+        <field name="name">Asset ownership split across multiple accounts/portfolios</field>
+        <field name="description">Causes confusing, inconsistent permission errors that look Odoo-side.</field>
+        <field name="mitigation">Consolidate ownership into one Business Portfolio before configuring Odoo.</field>
+        <field name="likelihood">medium</field>
+        <field name="impact">medium</field>
+    </record>
+    <record id="risk_4" model="integration.risk">
+        <field name="name">Instagram account not actually a Business/Professional account</field>
+        <field name="description">Page/Instagram linkage and messaging permissions silently fail.</field>
+        <field name="mitigation">Confirm account type explicitly in the audit before attempting to link it.</field>
+        <field name="likelihood">low</field>
+        <field name="impact">high</field>
+    </record>
+    <record id="risk_5" model="integration.risk">
+        <field name="name">Short-lived or user-scoped access token used in production</field>
+        <field name="description">Integration breaks unexpectedly when the token expires.</field>
+        <field name="mitigation">Use a long-lived System User token, documented with its renewal process.</field>
+        <field name="likelihood">medium</field>
+        <field name="impact">high</field>
+    </record>
+    <record id="risk_6" model="integration.risk">
+        <field name="name">Over-broad Meta App Review request</field>
+        <field name="description">Slower review, larger security surface than needed.</field>
+        <field name="mitigation">Request only the permissions this specific scope requires.</field>
+        <field name="likelihood">low</field>
+        <field name="impact">medium</field>
+    </record>
+    <record id="risk_7" model="integration.risk">
+        <field name="name">Webhook unreachable or misconfigured</field>
+        <field name="description">Messages send but replies never arrive back in Odoo.</field>
+        <field name="mitigation">Explicitly verify webhook reachability and subscription fields in Phase 3.</field>
+        <field name="likelihood">medium</field>
+        <field name="impact">high</field>
+    </record>
+    <record id="risk_8" model="integration.risk">
+        <field name="name">Email deliverability issues mistaken for an Odoo bug</field>
+        <field name="description">Wastes time debugging the wrong layer.</field>
+        <field name="mitigation">Check SPF/DKIM alignment early if any email issue is flagged in the audit.</field>
+        <field name="likelihood">low</field>
+        <field name="impact">medium</field>
+    </record>
+</odoo>
